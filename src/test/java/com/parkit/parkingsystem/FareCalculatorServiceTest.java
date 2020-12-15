@@ -159,6 +159,7 @@ public class FareCalculatorServiceTest {
         assertEquals(0, 0 * ticket.getPrice() );
     }
 
+
     @Test
     public void calculateFivePercentForRecurringUsersBike(){
         Date inTime = new Date();
@@ -177,6 +178,7 @@ public class FareCalculatorServiceTest {
     }
 
     @Test
+
     public void calculateFivePercentForRecurringUsersCar(){
         Date inTime = new Date();
         inTime.setTime( System.currentTimeMillis() - ( 60 * 60 * 1000) );
