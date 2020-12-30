@@ -1,9 +1,9 @@
 package com.parkit.parkingsystem.service;
 
-
 import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.dao.TicketDAO;
 import com.parkit.parkingsystem.model.Ticket;
+import org.mockito.Mock;
 
 
 public class FareCalculatorService {
@@ -11,8 +11,10 @@ public class FareCalculatorService {
     private TicketDAO ticketDAO;
 
     public FareCalculatorService(TicketDAO ticketDAO) {
+
         this.ticketDAO = ticketDAO;
     }
+
 
     public void calculateFare(Ticket ticket) {
         if ((ticket.getOutTime() == null) || (ticket.getOutTime().before(ticket.getInTime()))) {
@@ -31,10 +33,6 @@ public class FareCalculatorService {
             if (ticketDAO.getTicket(ticket.getVehicleRegNumber()).getOutTime() != null)
                 coeff = 0.95f;
         }
-
-
-        //System.out.println("le stationnement est payant");
-
 
         switch (ticket.getParkingSpot().getParkingType()) {
             case CAR: {
