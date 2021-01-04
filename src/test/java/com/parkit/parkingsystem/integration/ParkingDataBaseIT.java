@@ -46,7 +46,7 @@ public class ParkingDataBaseIT {
 
     @AfterAll
     private static void tearDown(){
-
+        dataBasePrepareService.clearDataBaseEntries();
     }
 
     @Test
@@ -69,20 +69,19 @@ public class ParkingDataBaseIT {
     }
 
     @Test
-    public void testParkingLotExit(){
+    public void testParkingLotExit() throws InterruptedException {
+        // Arrange
         testParkingACar();
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
+        Thread.sleep(500);
         parkingService.processExitingVehicle();
-        //TODO: check that the fare generated and out time are populated correctly in the database
-        try {
-            Ticket ticket = ticketDAO.getTicket("ABCDEF");
-            assertNotNull(ticket);
-            assertNotNull(ticket.getOutTime());
-            assertNotNull(ticket.getPrice());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Act
+        Ticket ticket = ticketDAO.getTicket("ABCDEF");
+
+        // Assert
+        assertEquals(0, ticket.getPrice());
+        assertNotNull(ticket.getOutTime());
 
     }
 

@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 public class ParkingServiceTest {
 
     private static ParkingService parkingService;
-
+    private static Ticket ticket;
     @Mock
     private static InputReaderUtil inputReaderUtil;
     @Mock
@@ -54,9 +54,8 @@ public class ParkingServiceTest {
 
     @Test
     public void processExitingVehicleTest(){
+
         parkingService.processExitingVehicle();
         verify(parkingSpotDAO, Mockito.times(1)).updateParking(any(ParkingSpot.class));
-
-
     }
-}
+    }

@@ -105,8 +105,8 @@ public class ParkingService {
             ticket.setOutTime(outTime);
             try {
                 fareCalculatorService.calculateFare(ticket);
-            }catch (Exception e){
-                logger.error("Unable to process exiting vehicle",e);
+            } catch (Exception e){
+                logger.error("Error calculate type");
             }
             if(ticketDAO.updateTicket(ticket)) {
                 ParkingSpot parkingSpot = ticket.getParkingSpot();
